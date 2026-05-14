@@ -1,0 +1,288 @@
+/* =========================================================
+   espresso4me Digitalni Meni  |  Admin styles
+   ========================================================= */
+
+#edm-wrapper {
+	padding: 4px 0 8px;
+	font-size: 13px;
+}
+
+/* ----- QR section ---------------------------------------- */
+
+.edm-qr-section {
+	display: flex;
+	gap: 24px;
+	align-items: flex-start;
+	padding: 20px 20px 16px;
+	background: #f9f4ef;
+	border: 1px solid #e8d5c0;
+	border-radius: 8px;
+	margin-bottom: 24px;
+}
+
+.edm-qr-img-wrap {
+	flex-shrink: 0;
+	padding: 8px;
+	background: #fff;
+	border: 1px solid #e8d5c0;
+	border-radius: 6px;
+}
+
+.edm-qr-img-wrap img {
+	display: block;
+}
+
+.edm-qr-info h4 {
+	margin: 0 0 6px;
+	font-size: 13px;
+	font-weight: 600;
+	color: #2b1e12;
+}
+
+.edm-qr-info code {
+	display: block;
+	margin-bottom: 14px;
+	padding: 6px 10px;
+	background: #fff;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	font-size: 12px;
+	color: #c8773a;
+	word-break: break-all;
+}
+
+.edm-qr-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-bottom: 10px;
+}
+
+.edm-btn-download {
+	background: #c8773a !important;
+	border-color: #b5662c !important;
+	color: #fff !important;
+}
+.edm-btn-download:hover {
+	background: #b5662c !important;
+}
+
+.edm-hint {
+	margin: 0;
+	font-size: 11px;
+	color: #999;
+	font-style: italic;
+}
+
+/* ----- Notices ------------------------------------------- */
+
+.edm-notice {
+	padding: 12px 16px;
+	border-radius: 6px;
+	margin-bottom: 20px;
+	font-size: 13px;
+	line-height: 1.5;
+}
+
+.edm-notice-info {
+	background: #e8f0fe;
+	border: 1px solid #b4cdfa;
+	color: #1a3a6b;
+}
+
+/* ----- Editor section ------------------------------------ */
+
+.edm-editor-section {
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	overflow: hidden;
+}
+
+.edm-editor-header {
+	padding: 14px 18px;
+	background: #f7f5f3;
+	border-bottom: 1px solid #ddd;
+}
+
+.edm-editor-header h4 {
+	margin: 0 0 4px;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.edm-editor-header .edm-hint {
+	margin: 0;
+}
+
+#edm-categories-list {
+	padding: 12px 18px 4px;
+}
+
+/* ----- Empty state --------------------------------------- */
+
+.edm-empty-state {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 32px 20px;
+	color: #aaa;
+	text-align: center;
+}
+
+.edm-empty-state p {
+	margin: 10px 0 0;
+	font-size: 13px;
+	line-height: 1.6;
+}
+
+/* ----- Category ------------------------------------------ */
+
+.edm-category {
+	margin-bottom: 16px;
+	border: 1px solid #ddd;
+	border-radius: 7px;
+	overflow: hidden;
+	background: #fff;
+}
+
+.edm-category-header {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 10px 14px;
+	background: #f7f5f3;
+	border-bottom: 1px solid #ddd;
+}
+
+.edm-cat-name {
+	flex: 1;
+	font-size: 14px;
+	font-weight: 600 !important;
+	border: 1px solid #ddd !important;
+	border-radius: 4px !important;
+	padding: 6px 10px !important;
+	box-shadow: none !important;
+	color: #2b1e12;
+}
+
+.edm-cat-name:focus {
+	border-color: #c8773a !important;
+	outline: none;
+	box-shadow: 0 0 0 2px rgba(200,119,58,0.15) !important;
+}
+
+.edm-remove-cat {
+	font-size: 12px !important;
+	padding: 4px 10px !important;
+	color: #d63638 !important;
+	background: none !important;
+	border: 1px solid #d63638 !important;
+	border-radius: 4px !important;
+	cursor: pointer;
+	flex-shrink: 0;
+	transition: all 0.15s;
+	line-height: 1.6 !important;
+	text-decoration: none !important;
+}
+
+.edm-remove-cat:hover {
+	background: #d63638 !important;
+	color: #fff !important;
+}
+
+/* ----- Items list ---------------------------------------- */
+
+.edm-items-list {
+	padding: 6px 14px 0;
+}
+
+.edm-item {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 8px 0;
+	border-bottom: 1px solid #f3f0ed;
+}
+
+.edm-item:last-child {
+	border-bottom: none;
+}
+
+.edm-item-fields {
+	display: flex;
+	flex: 1;
+	gap: 8px;
+	flex-wrap: wrap;
+}
+
+.edm-item-fields input[type="text"] {
+	font-size: 13px !important;
+	border: 1px solid #ddd !important;
+	border-radius: 4px !important;
+	padding: 5px 8px !important;
+	box-shadow: none !important;
+	line-height: 1.4;
+}
+
+.edm-item-fields input[type="text"]:focus {
+	border-color: #c8773a !important;
+	box-shadow: 0 0 0 2px rgba(200,119,58,0.12) !important;
+	outline: none;
+}
+
+.edm-item-name  { flex: 2; min-width: 110px; }
+.edm-item-desc  { flex: 3; min-width: 150px; }
+.edm-item-price { flex: 0 0 90px; }
+
+.edm-remove-item {
+	flex-shrink: 0;
+	width: 26px;
+	height: 26px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: none;
+	border: none;
+	cursor: pointer;
+	color: #ccc;
+	border-radius: 4px;
+	padding: 0;
+	font-size: 18px;
+	line-height: 1;
+	transition: color 0.15s, background 0.15s;
+}
+
+.edm-remove-item:hover {
+	color: #d63638;
+	background: #fff0f0;
+}
+
+.edm-add-item-btn {
+	display: block;
+	margin: 10px 14px 14px;
+	font-size: 12px !important;
+}
+
+/* ----- Add category button ------------------------------- */
+
+.edm-add-cat-btn {
+	display: block !important;
+	width: 100%;
+	text-align: center !important;
+	margin: 0 !important;
+	border-radius: 0 !important;
+	border: none !important;
+	border-top: 1px solid #ddd !important;
+	background: #fff !important;
+	padding: 12px !important;
+	font-size: 13px !important;
+	color: #c8773a !important;
+	font-weight: 600 !important;
+	cursor: pointer;
+	transition: background 0.15s;
+}
+
+.edm-add-cat-btn:hover {
+	background: #f9f4ef !important;
+	color: #b5662c !important;
+}
