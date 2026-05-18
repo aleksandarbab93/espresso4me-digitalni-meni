@@ -118,7 +118,7 @@ class EDM_Admin {
 		// Sanitize all text fields recursively
 		$clean = edm_sanitize_menu_data( $decoded );
 
-		update_post_meta( $post_id, '_edm_menu_data', wp_json_encode( $clean ) );
+		update_post_meta( $post_id, '_edm_menu_data', json_encode( $clean, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) );
 	}
 
 	// -------------------------------------------------------------------------
@@ -197,10 +197,30 @@ function edm_sanitize_menu_data( $data ) {
 				'price'       => sanitize_text_field( $item['price'] ?? '' ),
 			];
 		}
+		$subcategories = [];
+		foreach ( (array) ( $cat['subcategories'] ?? [] ) as $subcat ) {
+			$sub_items = [];
+			foreach ( (array) ( $subcat['items'] ?? [] ) as $item ) {
+				$sub_items[] = [
+					'id'          => sanitize_text_field( $item['id'] ?? '' ),
+					'name'        => sanitize_text_field( $item['name'] ?? '' ),
+					'description' => sanitize_textarea_field( $item['description'] ?? '' ),
+					'price'       => sanitize_text_field( $item['price'] ?? '' ),
+				];
+			}
+			$subcategories[] = [
+				'id'    => sanitize_text_field( $subcat['id'] ?? '' ),
+				'name'  => sanitize_text_field( $subcat['name'] ?? '' ),
+				'items' => $sub_items,
+			];
+		}
+
 		$categories[] = [
-			'id'    => sanitize_text_field( $cat['id'] ?? '' ),
-			'name'  => sanitize_text_field( $cat['name'] ?? '' ),
-			'items' => $items,
+			'id'            => sanitize_text_field( $cat['id'] ?? '' ),
+			'name'          => sanitize_text_field( $cat['name'] ?? '' ),
+			'icon'          => sanitize_text_field( $cat['icon'] ?? '📋' ),
+			'items'         => $items,
+			'subcategories' => $subcategories,
 		];
 	}
 

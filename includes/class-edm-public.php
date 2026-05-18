@@ -57,7 +57,18 @@ class EDM_Public {
 
 		$listing_name = $listing->post_title;
 		$listing_url  = get_permalink( $listing->ID );
-		$logo_url     = get_the_post_thumbnail_url( $listing->ID, 'medium' );
+
+		// Use MyListing's logo field (job_logo meta) — the circular logo shown on the listing page
+		$logo_url = '';
+		if ( class_exists( '\\MyListing\\Src\\Listing' ) ) {
+			$ml = \MyListing\Src\Listing::get( $listing );
+			if ( $ml ) {
+				$logo_url = $ml->get_logo( 'thumbnail' );
+			}
+		}
+		if ( ! $logo_url ) {
+			$logo_url = get_the_post_thumbnail_url( $listing->ID, 'thumbnail' );
+		}
 
 		// Load standalone template
 		include EDM_PLUGIN_DIR . 'templates/menu.php';
