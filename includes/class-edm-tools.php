@@ -107,7 +107,7 @@ class EDM_Tools {
 				[
 					'id'            => 'cat_2',
 					'name'          => 'Bezalkoholna Pića',
-					'icon'          => 'droplets',
+					'icon'          => 'cup-soda',
 					'subcategories' => [
 						[
 							'id'    => 'subcat_2_1',

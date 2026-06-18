@@ -349,19 +349,105 @@
 
 .edm-item {
 	display: flex;
-	align-items: center;
-	gap: 8px;
+	flex-direction: column;
+	gap: 6px;
 	padding: 8px 0;
 	border-bottom: 1px solid #f3f0ed;
 }
 
 .edm-item:last-child { border-bottom: none; }
 
+.edm-item-main {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
 .edm-item-fields {
 	display: flex;
 	flex: 1;
 	gap: 8px;
 	flex-wrap: wrap;
+}
+
+/* ----- Item image control --------------------------------- */
+
+.edm-item-image {
+	position: relative;
+	width: 40px;
+	height: 40px;
+	flex-shrink: 0;
+}
+
+.edm-item-image-add {
+	width: 40px;
+	height: 40px;
+	border: 1.5px dashed #ddd;
+	border-radius: 6px;
+	background: #fafafa;
+	color: #bbb;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0;
+	transition: border-color .15s, color .15s;
+}
+
+.edm-item-image-add:hover { border-color: #c8773a; color: #c8773a; }
+
+.edm-item-image-preview {
+	width: 40px;
+	height: 40px;
+	border-radius: 6px;
+	object-fit: cover;
+	border: 1px solid #ddd;
+	cursor: pointer;
+	display: block;
+}
+
+.edm-item-image-remove {
+	position: absolute;
+	top: -6px;
+	right: -6px;
+	width: 16px;
+	height: 16px;
+	border-radius: 50%;
+	background: #d63638;
+	color: #fff;
+	border: none;
+	font-size: 11px;
+	line-height: 1;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0;
+}
+
+.edm-item-image-remove:hover { background: #b32d2f; }
+
+/* ----- Item ingredients row -------------------------------- */
+
+.edm-item-extra { margin-left: 74px; }
+
+.edm-item-extra input[type="text"] {
+	width: 100%;
+	font-size: 12px !important;
+	font-style: italic;
+	color: #7a6655;
+	border: 1px solid #eee !important;
+	border-radius: 4px !important;
+	padding: 5px 8px !important;
+	box-shadow: none !important;
+}
+
+.edm-item-extra input[type="text"]:focus {
+	border-color: #c8773a !important;
+	box-shadow: 0 0 0 2px rgba(200,119,58,.1) !important;
+	outline: none;
+	font-style: normal;
+	color: #2b1e12;
 }
 
 .edm-item-fields input[type="text"] {

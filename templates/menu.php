@@ -27,6 +27,10 @@ function edm_svg( $key, $size = 44, $color = 'currentColor', $stroke_width = '1.
 			'pizza'          => '<path d="M15 11h.01"/><path d="M11 15h.01"/><path d="M16 16h.01"/><path d="m2 16 20 6-6-20A20 20 0 0 0 2 16"/><path d="M5.71 17.11a17.04 17.04 0 0 1 11.4-11.4"/>',
 			'sandwich'       => '<path d="M3 11v3a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-3"/><path d="M12 19H4a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-3.83"/><path d="m3 11 7.77-6.04a2 2 0 0 1 2.46 0L21 11H3z"/><path d="M12.97 19.77 7 15h12.5l-3.75 4.5a2 2 0 0 1-2.78.27z"/>',
 			'salad'          => '<path d="M7 21h10"/><path d="M12 21a9 9 0 0 0 9-9H3a9 9 0 0 0 9 9z"/><path d="M11.38 12a2.4 2.4 0 0 1-.4-4.77 2.4 2.4 0 0 1 3.2-2.77 2.4 2.4 0 0 1 3.47-.63 2.4 2.4 0 0 1 3.37 3.37 2.4 2.4 0 0 1-1.1 3.7 2.51 2.51 0 0 1 .03 1.1"/><path d="m13 12 4-4"/><path d="M10.9 7.25A3.99 3.99 0 0 0 4 10c0 .73.2 1.41.54 2"/>',
+			'pasta'          => '<path d="M3 12h18"/><path d="M4 12a8 8 0 0 0 16 0"/><path d="M9 12V7c0-.8.4-1.1 1-1.5"/><path d="M12 12V6c0-.8.4-1.1 1-1.5"/><path d="M15 12V7c0-.8.4-1.1 1-1.5"/>',
+			'meat'           => '<circle cx="8" cy="9" r="5"/><line x1="11.5" y1="12.5" x2="17.5" y2="18.5"/><line x1="16" y1="20" x2="18" y2="18"/><line x1="18" y1="20" x2="20" y2="18"/>',
+			'fish'           => '<path d="M2 12c2.5-4 7-6 11-6 4.5 0 8 2.5 9 6-1 3.5-4.5 6-9 6-4 0-8.5-2-11-6Z"/><path d="M21 9.5c1.3.7 1.3 2.3 0 3"/><circle cx="7" cy="11" r=".6" fill="currentColor" stroke="none"/>',
+			'shell'          => '<path d="M3 14a9 9 0 0 1 18 0Z"/><path d="M7 14a5 5 0 0 1 10 0"/><path d="M12 5v9"/><path d="M3 14h18"/>',
 			'cake'           => '<path d="M20 21v-8a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8"/><path d="M4 16s.5-1 2-1 2.5 2 4 2 2.5-2 4-2 2 1 2 1"/><path d="M2 21h20"/><path d="M7 8v2"/><path d="M12 8v2"/><path d="M17 8v2"/><path d="M7 4h.01"/><path d="M12 4h.01"/><path d="M17 4h.01"/>',
 			'ice-cream'      => '<path d="M12 17c5 0 8-2.69 8-6H4c0 3.31 3 6 8 6zm-4 4h8m-4-4v4M5.14 11a3.5 3.5 0 1 1 6.71 0"/><path d="M12.14 11a3.5 3.5 0 1 1 6.71 0"/><path d="M15.5 6.5a3.5 3.5 0 1 0-7 0"/>',
 			'croissant'      => '<path d="m4.6 13.11 5.79-3.21C11.39 9.27 12 9.93 12 10.5V21a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 .9-1.67z"/><path d="m19.4 13.11-5.79-3.21C12.61 9.27 12 9.93 12 10.5V21a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-5a2 2 0 0 0-.9-1.67z"/><path d="M12 13a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/><path d="M12 3c-2.17 0-3.96.88-5.31 2h10.62C15.96 3.88 14.17 3 12 3z"/>',
@@ -323,7 +327,7 @@ function edm_svg( $key, $size = 44, $color = 'currentColor', $stroke_width = '1.
 
 		.m-item {
 			display: flex;
-			align-items: baseline;
+			align-items: center;
 			justify-content: space-between;
 			gap: 12px;
 			padding: 12px 0;
@@ -345,6 +349,30 @@ function edm_svg( $key, $size = 44, $color = 'currentColor', $stroke_width = '1.
 			color: var(--muted);
 			margin-top: 2px;
 			line-height: 1.4;
+		}
+
+		.m-item-ingredients {
+			font-size: 0.72rem;
+			color: var(--muted);
+			font-style: italic;
+			margin-top: 3px;
+			line-height: 1.4;
+		}
+
+		.m-item-img {
+			width: 52px;
+			height: 52px;
+			border-radius: 10px;
+			overflow: hidden;
+			flex-shrink: 0;
+			background: var(--border);
+		}
+
+		.m-item-img img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			display: block;
 		}
 
 		.m-item-price {
@@ -462,6 +490,10 @@ var EDM_ICONS = {
 	'pizza':         '<path d="M15 11h.01"/><path d="M11 15h.01"/><path d="M16 16h.01"/><path d="m2 16 20 6-6-20A20 20 0 0 0 2 16"/><path d="M5.71 17.11a17.04 17.04 0 0 1 11.4-11.4"/>',
 	'sandwich':      '<path d="M3 11v3a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-3"/><path d="M12 19H4a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-3.83"/><path d="m3 11 7.77-6.04a2 2 0 0 1 2.46 0L21 11H3z"/><path d="M12.97 19.77 7 15h12.5l-3.75 4.5a2 2 0 0 1-2.78.27z"/>',
 	'salad':         '<path d="M7 21h10"/><path d="M12 21a9 9 0 0 0 9-9H3a9 9 0 0 0 9 9z"/><path d="M11.38 12a2.4 2.4 0 0 1-.4-4.77 2.4 2.4 0 0 1 3.2-2.77 2.4 2.4 0 0 1 3.47-.63 2.4 2.4 0 0 1 3.37 3.37 2.4 2.4 0 0 1-1.1 3.7 2.51 2.51 0 0 1 .03 1.1"/><path d="m13 12 4-4"/><path d="M10.9 7.25A3.99 3.99 0 0 0 4 10c0 .73.2 1.41.54 2"/>',
+	'pasta':         '<path d="M3 12h18"/><path d="M4 12a8 8 0 0 0 16 0"/><path d="M9 12V7c0-.8.4-1.1 1-1.5"/><path d="M12 12V6c0-.8.4-1.1 1-1.5"/><path d="M15 12V7c0-.8.4-1.1 1-1.5"/>',
+	'meat':          '<circle cx="8" cy="9" r="5"/><line x1="11.5" y1="12.5" x2="17.5" y2="18.5"/><line x1="16" y1="20" x2="18" y2="18"/><line x1="18" y1="20" x2="20" y2="18"/>',
+	'fish':          '<path d="M2 12c2.5-4 7-6 11-6 4.5 0 8 2.5 9 6-1 3.5-4.5 6-9 6-4 0-8.5-2-11-6Z"/><path d="M21 9.5c1.3.7 1.3 2.3 0 3"/><circle cx="7" cy="11" r=".6" fill="currentColor" stroke="none"/>',
+	'shell':         '<path d="M3 14a9 9 0 0 1 18 0Z"/><path d="M7 14a5 5 0 0 1 10 0"/><path d="M12 5v9"/><path d="M3 14h18"/>',
 	'cake':          '<path d="M20 21v-8a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8"/><path d="M4 16s.5-1 2-1 2.5 2 4 2 2.5-2 4-2 2 1 2 1"/><path d="M2 21h20"/><path d="M7 8v2"/><path d="M12 8v2"/><path d="M17 8v2"/><path d="M7 4h.01"/><path d="M12 4h.01"/><path d="M17 4h.01"/>',
 	'ice-cream':     '<path d="M12 17c5 0 8-2.69 8-6H4c0 3.31 3 6 8 6zm-4 4h8m-4-4v4M5.14 11a3.5 3.5 0 1 1 6.71 0"/><path d="M12.14 11a3.5 3.5 0 1 1 6.71 0"/><path d="M15.5 6.5a3.5 3.5 0 1 0-7 0"/>',
 	'croissant':     '<path d="m4.6 13.11 5.79-3.21C11.39 9.27 12 9.93 12 10.5V21a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 .9-1.67z"/><path d="m19.4 13.11-5.79-3.21C12.61 9.27 12 9.93 12 10.5V21a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-5a2 2 0 0 0-.9-1.67z"/><path d="M12 13a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/><path d="M12 3c-2.17 0-3.96.88-5.31 2h10.62C15.96 3.88 14.17 3 12 3z"/>',
@@ -494,18 +526,14 @@ function edm_open(idx) {
 	} else {
 		directItems.forEach(function (item) {
 			if (!item.name) return;
-			var desc  = item.description ? '<div class="m-item-desc">' + esc(item.description) + '</div>' : '';
-			var price = item.price ? '<div class="m-item-price">' + esc(item.price) + '€</div>' : '';
-			html += '<div class="m-item"><div class="m-item-info"><div class="m-item-name">' + esc(item.name) + '</div>' + desc + '</div>' + price + '</div>';
+			html += renderMenuItem(item);
 		});
 		subcats.forEach(function (subcat) {
 			var subItems = (subcat.items || []).filter(function (i) { return i.name; });
 			if (!subItems.length) return;
 			html += '<div class="m-subcat-header">' + esc(subcat.name) + '</div>';
 			subItems.forEach(function (item) {
-				var desc  = item.description ? '<div class="m-item-desc">' + esc(item.description) + '</div>' : '';
-				var price = item.price ? '<div class="m-item-price">' + esc(item.price) + '€</div>' : '';
-				html += '<div class="m-item"><div class="m-item-info"><div class="m-item-name">' + esc(item.name) + '</div>' + desc + '</div>' + price + '</div>';
+				html += renderMenuItem(item);
 			});
 		});
 	}
@@ -531,6 +559,18 @@ function esc(t) {
 	var d = document.createElement('div');
 	d.textContent = String(t || '');
 	return d.innerHTML;
+}
+
+function escAttr(t) {
+	return esc(t).replace(/"/g, '&quot;');
+}
+
+function renderMenuItem(item) {
+	var img         = item.image ? '<div class="m-item-img"><img src="' + escAttr(item.image) + '" alt="" loading="lazy"></div>' : '';
+	var desc        = item.description ? '<div class="m-item-desc">' + esc(item.description) + '</div>' : '';
+	var ingredients = item.ingredients ? '<div class="m-item-ingredients">' + esc(item.ingredients) + '</div>' : '';
+	var price       = item.price ? '<div class="m-item-price">' + esc(item.price) + '€</div>' : '';
+	return '<div class="m-item">' + img + '<div class="m-item-info"><div class="m-item-name">' + esc(item.name) + '</div>' + desc + ingredients + '</div>' + price + '</div>';
 }
 </script>
 

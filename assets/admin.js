@@ -8,6 +8,7 @@
 	var catDragState  = null; // category drag: { catId }
 
 	var GRIP_SVG = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="5" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="19" r="1"/><circle cx="15" cy="5" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="19" r="1"/></svg>';
+	var CAMERA_SVG = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>';
 
 	// -------------------------------------------------------------------------
 	// Lucide icon library (SVG paths — subset za meni)
@@ -28,6 +29,10 @@
 		'pizza':        { label: 'Pizza',            svg: '<path d="M15 11h.01"/><path d="M11 15h.01"/><path d="M16 16h.01"/><path d="m2 16 20 6-6-20A20 20 0 0 0 2 16"/><path d="M5.71 17.11a17.04 17.04 0 0 1 11.4-11.4"/>' },
 		'sandwich':     { label: 'Sendviči',         svg: '<path d="M3 11v3a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-3"/><path d="M12 19H4a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-3.83"/><path d="m3 11 7.77-6.04a2 2 0 0 1 2.46 0L21 11H3z"/><path d="M12.97 19.77 7 15h12.5l-3.75 4.5a2 2 0 0 1-2.78.27z"/>' },
 		'salad':        { label: 'Salate',           svg: '<path d="M7 21h10"/><path d="M12 21a9 9 0 0 0 9-9H3a9 9 0 0 0 9 9z"/><path d="M11.38 12a2.4 2.4 0 0 1-.4-4.77 2.4 2.4 0 0 1 3.2-2.77 2.4 2.4 0 0 1 3.47-.63 2.4 2.4 0 0 1 3.37 3.37 2.4 2.4 0 0 1-1.1 3.7 2.51 2.51 0 0 1 .03 1.1"/><path d="m13 12 4-4"/><path d="M10.9 7.25A3.99 3.99 0 0 0 4 10c0 .73.2 1.41.54 2"/>' },
+		'pasta':        { label: 'Paste',            svg: '<path d="M3 12h18"/><path d="M4 12a8 8 0 0 0 16 0"/><path d="M9 12V7c0-.8.4-1.1 1-1.5"/><path d="M12 12V6c0-.8.4-1.1 1-1.5"/><path d="M15 12V7c0-.8.4-1.1 1-1.5"/>' },
+		'meat':         { label: 'Jela od mesa',     svg: '<circle cx="8" cy="9" r="5"/><line x1="11.5" y1="12.5" x2="17.5" y2="18.5"/><line x1="16" y1="20" x2="18" y2="18"/><line x1="18" y1="20" x2="20" y2="18"/>' },
+		'fish':         { label: 'Jela od ribe',     svg: '<path d="M2 12c2.5-4 7-6 11-6 4.5 0 8 2.5 9 6-1 3.5-4.5 6-9 6-4 0-8.5-2-11-6Z"/><path d="M21 9.5c1.3.7 1.3 2.3 0 3"/><circle cx="7" cy="11" r=".6" fill="currentColor" stroke="none"/>' },
+		'shell':        { label: 'Morski plodovi',   svg: '<path d="M3 14a9 9 0 0 1 18 0Z"/><path d="M7 14a5 5 0 0 1 10 0"/><path d="M12 5v9"/><path d="M3 14h18"/>' },
 		// Deserti
 		'cake':         { label: 'Torte/Kolači',     svg: '<path d="M20 21v-8a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8"/><path d="M4 16s.5-1 2-1 2.5 2 4 2 2.5-2 4-2 2 1 2 1"/><path d="M2 21h20"/><path d="M7 8v2"/><path d="M12 8v2"/><path d="M17 8v2"/><path d="M7 4h.01"/><path d="M12 4h.01"/><path d="M17 4h.01"/>' },
 		'ice-cream':    { label: 'Sladoled',         svg: '<path d="M12 17c5 0 8-2.69 8-6H4c0 3.31 3 6 8 6zm-4 4h8m-4-4v4M5.14 11a3.5 3.5 0 1 1 6.71 0"/><path d="M12.14 11a3.5 3.5 0 1 1 6.71 0"/><path d="M15.5 6.5a3.5 3.5 0 1 0-7 0"/>' },
@@ -104,7 +109,7 @@
 	function addItem(catId) {
 		var cat = findById(menuData.categories, catId);
 		if (!cat) return;
-		cat.items.push({ id: uid(), name: '', description: '', price: '' });
+		cat.items.push({ id: uid(), name: '', description: '', price: '', image: '', ingredients: '' });
 		render();
 		sync();
 		var catEl = document.querySelector('.edm-category[data-id="' + catId + '"]');
@@ -149,7 +154,7 @@
 		if (!cat || !cat.subcategories) return;
 		var subcat = findById(cat.subcategories, subcatId);
 		if (!subcat) return;
-		subcat.items.push({ id: uid(), name: '', description: '', price: '' });
+		subcat.items.push({ id: uid(), name: '', description: '', price: '', image: '', ingredients: '' });
 		render();
 		sync();
 		var subcatEl = document.querySelector('.edm-subcategory[data-subid="' + subcatId + '"]');
@@ -233,7 +238,7 @@
 		});
 	}
 
-	function addDragHandle(row, catId, subcatId, item) {
+	function addDragHandle(handleContainer, row, catId, subcatId, item) {
 		var handle = document.createElement('div');
 		handle.className = 'edm-drag-handle';
 		handle.draggable = true;
@@ -251,7 +256,7 @@
 			document.querySelectorAll('.edm-drop-active').forEach(function (el) { el.classList.remove('edm-drop-active'); });
 			dragState = null;
 		});
-		row.insertBefore(handle, row.firstChild);
+		handleContainer.insertBefore(handle, handleContainer.firstChild);
 	}
 
 	// -------------------------------------------------------------------------
@@ -319,6 +324,71 @@
 		return '<svg xmlns="http://www.w3.org/2000/svg" width="' + size + '" height="' + size + '" viewBox="0 0 24 24" '
 			+ 'fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'
 			+ info.svg + '</svg>';
+	}
+
+	// -------------------------------------------------------------------------
+	// Item image picker (wp.media)
+	// -------------------------------------------------------------------------
+
+	function buildImageControl(item) {
+		var wrap = document.createElement('div');
+		wrap.className = 'edm-item-image';
+
+		function renderState() {
+			while (wrap.firstChild) wrap.removeChild(wrap.firstChild);
+
+			if (item.image) {
+				var img = document.createElement('img');
+				img.className = 'edm-item-image-preview';
+				img.src = item.image;
+				img.title = 'Klikni za promjenu slike';
+				img.addEventListener('click', openPicker);
+
+				var rmBtn = document.createElement('button');
+				rmBtn.type = 'button';
+				rmBtn.className = 'edm-item-image-remove';
+				rmBtn.title = 'Ukloni sliku';
+				rmBtn.innerHTML = '&times;';
+				rmBtn.addEventListener('click', function (e) {
+					e.stopPropagation();
+					item.image = '';
+					sync();
+					renderState();
+				});
+
+				wrap.appendChild(img);
+				wrap.appendChild(rmBtn);
+			} else {
+				var addBtn = document.createElement('button');
+				addBtn.type = 'button';
+				addBtn.className = 'edm-item-image-add';
+				addBtn.title = 'Dodaj sliku (opciono)';
+				addBtn.innerHTML = CAMERA_SVG;
+				addBtn.addEventListener('click', openPicker);
+				wrap.appendChild(addBtn);
+			}
+		}
+
+		function openPicker() {
+			if (!window.wp || !window.wp.media) return;
+			var frame = window.wp.media({
+				title: 'Izaberite sliku artikla',
+				button: { text: 'Koristi ovu sliku' },
+				multiple: false,
+				library: { type: 'image' }
+			});
+			frame.on('select', function () {
+				var attachment = frame.state().get('selection').first().toJSON();
+				var sizes = attachment.sizes || {};
+				item.image = (sizes.thumbnail && sizes.thumbnail.url) ? sizes.thumbnail.url : attachment.url;
+				sync();
+				renderState();
+			});
+			frame.open();
+		}
+
+		renderState();
+		return wrap;
 	}
 
 	// -------------------------------------------------------------------------
@@ -552,9 +622,15 @@
 	}
 
 	function buildSubItem(catId, subcatId, item) {
+		if (item.image === undefined) item.image = '';
+		if (item.ingredients === undefined) item.ingredients = '';
+
 		var row = document.createElement('div');
 		row.className = 'edm-item';
 		row.dataset.id = item.id;
+
+		var main = document.createElement('div');
+		main.className = 'edm-item-main';
 
 		var fields = document.createElement('div');
 		fields.className = 'edm-item-fields';
@@ -570,16 +646,30 @@
 		rmBtn.innerHTML = '&times;';
 		rmBtn.addEventListener('click', function () { removeSubItem(catId, subcatId, item.id); });
 
-		row.appendChild(fields);
-		row.appendChild(rmBtn);
-		addDragHandle(row, catId, subcatId, item);
+		main.appendChild(buildImageControl(item));
+		main.appendChild(fields);
+		main.appendChild(rmBtn);
+
+		var extra = document.createElement('div');
+		extra.className = 'edm-item-extra';
+		extra.appendChild(makeInput('edm-item-ingredients', item.ingredients, 'Sastojci (opciono, npr. paradajz, mozzarella, bosiljak)', function (v) { item.ingredients = v; sync(); }));
+
+		row.appendChild(main);
+		row.appendChild(extra);
+		addDragHandle(main, row, catId, subcatId, item);
 		return row;
 	}
 
 	function buildItem(catId, item) {
+		if (item.image === undefined) item.image = '';
+		if (item.ingredients === undefined) item.ingredients = '';
+
 		var row = document.createElement('div');
 		row.className = 'edm-item';
 		row.dataset.id = item.id;
+
+		var main = document.createElement('div');
+		main.className = 'edm-item-main';
 
 		var fields = document.createElement('div');
 		fields.className = 'edm-item-fields';
@@ -595,9 +685,17 @@
 		rmBtn.innerHTML = '&times;';
 		rmBtn.addEventListener('click', function () { removeItem(catId, item.id); });
 
-		row.appendChild(fields);
-		row.appendChild(rmBtn);
-		addDragHandle(row, catId, null, item);
+		main.appendChild(buildImageControl(item));
+		main.appendChild(fields);
+		main.appendChild(rmBtn);
+
+		var extra = document.createElement('div');
+		extra.className = 'edm-item-extra';
+		extra.appendChild(makeInput('edm-item-ingredients', item.ingredients, 'Sastojci (opciono, npr. paradajz, mozzarella, bosiljak)', function (v) { item.ingredients = v; sync(); }));
+
+		row.appendChild(main);
+		row.appendChild(extra);
+		addDragHandle(main, row, catId, null, item);
 		return row;
 	}
 

@@ -160,6 +160,8 @@ class EDM_Admin {
 			return;
 		}
 
+		wp_enqueue_media();
+
 		wp_enqueue_style(
 			'edm-admin',
 			EDM_PLUGIN_URL . 'assets/admin.css',
@@ -195,6 +197,8 @@ function edm_sanitize_menu_data( $data ) {
 				'name'        => sanitize_text_field( $item['name'] ?? '' ),
 				'description' => sanitize_textarea_field( $item['description'] ?? '' ),
 				'price'       => sanitize_text_field( $item['price'] ?? '' ),
+				'image'       => esc_url_raw( $item['image'] ?? '' ),
+				'ingredients' => sanitize_text_field( $item['ingredients'] ?? '' ),
 			];
 		}
 		$subcategories = [];
@@ -206,6 +210,8 @@ function edm_sanitize_menu_data( $data ) {
 					'name'        => sanitize_text_field( $item['name'] ?? '' ),
 					'description' => sanitize_textarea_field( $item['description'] ?? '' ),
 					'price'       => sanitize_text_field( $item['price'] ?? '' ),
+					'image'       => esc_url_raw( $item['image'] ?? '' ),
+					'ingredients' => sanitize_text_field( $item['ingredients'] ?? '' ),
 				];
 			}
 			$subcategories[] = [
