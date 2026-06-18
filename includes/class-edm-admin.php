@@ -162,17 +162,20 @@ class EDM_Admin {
 
 		wp_enqueue_media();
 
+		$css_path = EDM_PLUGIN_DIR . 'assets/admin.css';
+		$js_path  = EDM_PLUGIN_DIR . 'assets/admin.js';
+
 		wp_enqueue_style(
 			'edm-admin',
 			EDM_PLUGIN_URL . 'assets/admin.css',
 			[],
-			EDM_VERSION
+			file_exists( $css_path ) ? filemtime( $css_path ) : EDM_VERSION
 		);
 		wp_enqueue_script(
 			'edm-admin',
 			EDM_PLUGIN_URL . 'assets/admin.js',
 			[],
-			EDM_VERSION,
+			file_exists( $js_path ) ? filemtime( $js_path ) : EDM_VERSION,
 			true
 		);
 	}
